@@ -1,7 +1,7 @@
 # 🛡️ Docker-Based Hacking Lab 🛡️
 
 ![Docker](https://img.shields.io/badge/Docker-🐳-blue)
-![License](https://img.shields.io/github/license/herson/hackinglab)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![GitHub stars](https://img.shields.io/github/stars/herson/hackinglab?style=social)
 
 Welcome to the **Docker-Based Hacking Lab**! This repository offers a comprehensive, containerized environment tailored for penetration testing, vulnerability assessment, and security research. Utilizing Docker Compose, this lab integrates a suite of essential security tools, ensuring an isolated and reproducible setup suitable for both beginners and seasoned professionals.
