@@ -1,7 +1,6 @@
 # 🛡️ Docker-Based Hacking Lab 🛡️
 
 ![Docker](https://img.shields.io/badge/Docker-🐳-blue)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/herson/hackinglab/CI)
 ![License](https://img.shields.io/github/license/herson/hackinglab)
 ![GitHub stars](https://img.shields.io/github/stars/herson/hackinglab?style=social)
 
