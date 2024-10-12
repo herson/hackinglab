@@ -1,0 +1,108 @@
+services:
+  kali:
+    build: ./kali
+    container_name: kali
+    privileged: true
+    tty: true
+    networks:
+      - hackinglab
+    volumes:
+      - ./kali:/root
+    command: /bin/bash
+
+  metasploit:
+    build: ./metasploit
+    container_name: metasploit
+    volumes:
+      - ./metasploit:/home/msf/.msf4
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  nmap:
+    build: ./nmap
+    container_name: nmap
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  wireshark:
+    build: ./wireshark
+    container_name: wireshark
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./wireshark:/root
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  zap:
+    build:
+      context: ./zap
+      args:
+        ZAP_VERSION: 2.15.0
+    container_name: zap
+    ports:
+      - "2582:8080"  # Adjust ports as needed
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  dvwa:
+    build: ./dvwa
+    container_name: dvwa
+    ports:
+      - "2580:80"
+    volumes:
+      - ./dvwa:/var/www/html
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  webgoat:
+    build: ./webgoat
+    container_name: webgoat
+    ports:
+      - "2581:8080"
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  bwapp:
+    image: raesene/bwapp:latest
+    platform: linux/amd64
+    container_name: bwapp
+    ports:
+      - "2583:80"
+    environment:
+      - UPLOAD_ENABLED=1
+      - MYSQL_DATABASE=bWAPP
+      - MYSQL_USER=bWAPP
+      - MYSQL_PASSWORD=bWAPP
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  vulnerable_api:
+    build: ./vulnerable_api
+    container_name: vulnerable_api
+    ports:
+      - "2500:5000"
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+networks:
+  hackinglab:
+    driver: bridge
