@@ -5,3 +5,4 @@ docker-compose.override.yml
 
 # Service-specific
 vulnerable_api/__pycache__/
+wordpress/

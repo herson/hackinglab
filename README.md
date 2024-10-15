@@ -4,7 +4,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![GitHub stars](https://img.shields.io/github/stars/herson/hackinglab?style=social)
 
-Welcome to the **Docker-Based Hacking Lab**! This repository offers a comprehensive, containerized environment tailored for penetration testing, vulnerability assessment, and security research. Utilizing Docker Compose, this lab integrates a suite of essential security tools, ensuring an isolated and reproducible setup suitable for both beginners and seasoned professionals.
+Welcome to the **Docker-Based Hacking Lab**! This repository offers a comprehensive, containerized environment tailored for penetration testing, vulnerability assessment, and security research. Utilizing Docker Compose, this lab integrates a suite of essential security tools and vulnerable applications, ensuring an isolated and reproducible setup suitable for both beginners and seasoned professionals.
 
 ---
 
@@ -26,17 +26,28 @@ Welcome to the **Docker-Based Hacking Lab**! This repository offers a comprehens
     - [🔰 WebGoat](#️-webgoat)
     - [🦠 bWAPP](#-bwapp)
     - [🛡️ Vulnerable API](#️-vulnerable-api)
+    - [🍹 OWASP Juice Shop](#-owasp-juice-shop)
+    - [🧪 Mutillidae II](#-mutillidae-ii)
+    - [🔐 Security Shepherd](#-security-shepherd)
+    - [🐙 DVNA (Damn Vulnerable Node Application)](#-dvna-damn-vulnerable-node-application)
+    - [📝 Vulnerable WordPress](#-vulnerable-wordpress)
+    - [🔎 OpenVAS](#-openvas)
+    - [🛠️ Burp Suite](#️-burp-suite)
+    - [🐐 NodeGoat](#-nodegoat)
+    - [🧛 VAmPI](#-vampi)
   - [📈 Usage](#️-usage)
   - [🌐 Accessing the Services](#-accessing-the-services)
   - [🤝 Contributing](#-contributing)
   - [📄 License](#-license)
   - [📫 Contact](#-contact)
+  - [🔗 Useful Links](#-useful-links)
+  - [💡 Tips & Tricks](#-tips--tricks)
 
 ---
 
 ## 🔍 Overview
 
-The **Docker-Based Hacking Lab** is engineered to provide a versatile and secure environment for security enthusiasts to practice and enhance their skills. By containerizing each tool, the lab ensures that your host system remains unaffected, offering a safe playground for testing various security scenarios.
+The **Docker-Based Hacking Lab** is engineered to provide a versatile and secure environment for security enthusiasts to practice and enhance their skills. By containerizing each tool and vulnerable application, the lab ensures that your host system remains unaffected, offering a safe playground for testing various security scenarios.
 
 ---
 
@@ -45,7 +56,7 @@ The **Docker-Based Hacking Lab** is engineered to provide a versatile and secure
 - **Isolated Environment:** Each tool operates in its own container, preventing conflicts and ensuring system integrity.
 - **Scalable Setup:** Easily add or remove services as your needs evolve.
 - **Reproducible Builds:** Docker Compose guarantees consistent environments across different machines.
-- **Comprehensive Toolset:** Integrates industry-standard tools for a holistic security assessment experience.
+- **Comprehensive Toolset:** Integrates industry-standard tools and vulnerable applications for a holistic security assessment experience.
 - **Cross-Platform Compatibility:** Supports both `linux/amd64` and `linux/arm64/v8` architectures with platform specifications.
 
 ---
@@ -184,6 +195,96 @@ Before setting up the hacking lab, ensure you have the following installed on yo
 - RESTful endpoints for testing
 - Educational purpose for API security
 
+### 🍹 OWASP Juice Shop
+
+**Description:** An intentionally insecure web application written entirely in JavaScript, offering a platform to learn about web vulnerabilities.
+
+**Features:**
+
+- Covers OWASP Top Ten vulnerabilities
+- Gamified challenge system
+- Detailed tutorials and hints
+
+### 🧪 Mutillidae II
+
+**Description:** A free, open-source, deliberately vulnerable web application providing a target for web security enthusiasts.
+
+**Features:**
+
+- Multiple security challenge levels
+- Demonstrates common web vulnerabilities
+- Educational tool for penetration testing
+
+### 🔐 Security Shepherd
+
+**Description:** An OWASP project designed to foster and improve security testing skills through a practical, interactive environment.
+
+**Features:**
+
+- Variety of challenges across different difficulty levels
+- Covers web and mobile security topics
+- Leaderboards to track progress
+
+### 🐙 DVNA (Damn Vulnerable Node Application)
+
+**Description:** A Node.js web application with known vulnerabilities, designed to teach security concepts in Node.js environments.
+
+**Features:**
+
+- Demonstrates common Node.js vulnerabilities
+- RESTful API endpoints
+- Educational resource for Node.js security
+
+### 📝 Vulnerable WordPress
+
+**Description:** A WordPress installation with intentionally vulnerable plugins and themes for security testing.
+
+**Features:**
+
+- Exploitable plugins and themes
+- Common WordPress vulnerabilities
+- Platform for practicing WordPress security assessments
+
+### 🔎 OpenVAS
+
+**Description:** An open-source vulnerability scanner and manager for discovering security issues in systems and applications.
+
+**Features:**
+
+- Comprehensive vulnerability scanning
+- Regular updates with latest vulnerability tests
+- Detailed reporting and remediation guidance
+
+### 🛠️ Burp Suite
+
+**Description:** An integrated platform for performing security testing of web applications.
+
+**Features:**
+
+- Intercepting proxy
+- Scanner for automated vulnerability detection
+- Extensibility through plugins
+
+### 🐐 NodeGoat
+
+**Description:** An OWASP project aimed at teaching developers how to write secure Node.js code through a vulnerable application.
+
+**Features:**
+
+- Interactive security lessons
+- Demonstrates vulnerabilities in a Node.js environment
+- Hands-on approach to learning
+
+### 🧛 VAmPI
+
+**Description:** A vulnerable REST API application designed to facilitate learning about API security issues.
+
+**Features:**
+
+- Common API vulnerabilities
+- Practice API penetration testing
+- Educational resource for API security concepts
+
 ---
 
 ## 📈 Usage
@@ -218,17 +319,26 @@ Before setting up the hacking lab, ensure you have the following installed on yo
 
 ## 🌐 Accessing the Services
 
-| **Service**          | **Port Mapping** | **URL**                                      |
-|----------------------|------------------|----------------------------------------------|
-| **Kali Linux**       | N/A              | Access via Docker CLI or SSH                 |
-| **Metasploit**       | 2588:80          | `http://localhost:2588` (if web interface)    |
-| **Nmap**             | 2582:8080        | Use CLI tools within the container           |
-| **Wireshark**        | 2584:80          | `http://localhost:2584`                       |
-| **OWASP ZAP**        | 2582:8080        | `http://localhost:2582`                       |
-| **DVWA**             | 2580:80          | `http://localhost:2580`                       |
-| **WebGoat**          | 2581:8080        | `http://localhost:2581`                       |
-| **bWAPP**            | 2583:80          | `http://localhost:2583`                       |
-| **Vulnerable API**   | 2500:5000        | `http://localhost:2500`                       |
+| **Service**           | **Port Mapping** | **URL**                        |
+|-----------------------|------------------|--------------------------------|
+| **Kali Linux**        | N/A              | Access via Docker CLI or SSH   |
+| **Metasploit**        | N/A              | Use CLI tools within container |
+| **Nmap**              | N/A              | Use CLI tools within container |
+| **Wireshark**         | N/A              | Access via GUI (X11 Forwarding)|
+| **OWASP ZAP**         | 2582:8080        | `http://localhost:2582`        |
+| **DVWA**              | 2580:80          | `http://localhost:2580`        |
+| **WebGoat**           | 2581:8080        | `http://localhost:2581/WebGoat`|
+| **bWAPP**             | 2583:80          | `http://localhost:2583`        |
+| **Vulnerable API**    | 2500:5000        | `http://localhost:2500`        |
+| **OWASP Juice Shop**  | 3000:3000        | `http://localhost:3000`        |
+| **Mutillidae II**     | 2584:80          | `http://localhost:2584`        |
+| **Security Shepherd** | 2585:80          | `http://localhost:2585`        |
+| **DVNA**              | 2586:9090        | `http://localhost:2586`        |
+| **Vulnerable WordPress** | 2587:80      | `http://localhost:2587`        |
+| **OpenVAS**           | 9392:9392        | `https://localhost:9392`       |
+| **Burp Suite**        | N/A              | Access via GUI (X11 Forwarding)|
+| **NodeGoat**          | 4000:4000        | `http://localhost:4000`        |
+| **VAmPI**             | 6000:5000        | `http://localhost:6000`        |
 
 *Ensure that the ports are not being used by other services on your host machine.*
 
@@ -281,13 +391,23 @@ Project Link: [https://github.com/herson/hackinglab](https://github.com/herson/h
 
 - **Docker Documentation:** [https://docs.docker.com/](https://docs.docker.com/)
 - **Docker Compose Documentation:** [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
-- **OWASP ZAP:** [https://www.zaproxy.org/](https://www.zaproxy.org/)
+- **Kali Linux:** [https://www.kali.org/](https://www.kali.org/)
 - **Metasploit Framework:** [https://metasploit.help.rapid7.com/](https://metasploit.help.rapid7.com/)
+- **Nmap:** [https://nmap.org/](https://nmap.org/)
+- **Wireshark:** [https://www.wireshark.org/](https://www.wireshark.org/)
+- **OWASP ZAP:** [https://www.zaproxy.org/](https://www.zaproxy.org/)
 - **DVWA:** [http://www.dvwa.co.uk/](http://www.dvwa.co.uk/)
 - **WebGoat:** [https://owasp.org/www-project-webgoat/](https://owasp.org/www-project-webgoat/)
 - **bWAPP:** [http://www.itsecgames.com/](http://www.itsecgames.com/)
-- **Nmap:** [https://nmap.org/](https://nmap.org/)
-- **Wireshark:** [https://www.wireshark.org/](https://www.wireshark.org/)
+- **OWASP Juice Shop:** [https://owasp.org/www-project-juice-shop/](https://owasp.org/www-project-juice-shop/)
+- **Mutillidae II:** [https://github.com/webpwnized/mutillidae](https://github.com/webpwnized/mutillidae)
+- **Security Shepherd:** [https://owasp.org/www-project-security-shepherd/](https://owasp.org/www-project-security-shepherd/)
+- **DVNA:** [https://github.com/appsecco/dvna](https://github.com/appsecco/dvna)
+- **WordPress:** [https://wordpress.org/](https://wordpress.org/)
+- **OpenVAS:** [https://www.openvas.org/](https://www.openvas.org/)
+- **Burp Suite:** [https://portswigger.net/burp](https://portswigger.net/burp)
+- **NodeGoat:** [https://owasp.org/www-project-nodegoat/](https://owasp.org/www-project-nodegoat/)
+- **VAmPI:** [https://github.com/erev0s/VAmPI](https://github.com/erev0s/VAmPI)
 
 ---
 
@@ -297,6 +417,7 @@ Project Link: [https://github.com/herson/hackinglab](https://github.com/herson/h
 - **Security Best Practices:** Regularly update your Docker images to incorporate the latest security patches.
 - **Resource Management:** Monitor container resource usage to ensure optimal performance of your host machine.
 - **Networking:** Leverage Docker networks to simulate complex network topologies for advanced testing scenarios.
+- **Accessing GUI Applications:** For applications like Wireshark and Burp Suite, ensure you have X11 forwarding set up to access the GUI.
 
 ---
 

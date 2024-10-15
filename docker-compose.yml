@@ -48,7 +48,7 @@ services:
         ZAP_VERSION: 2.15.0
     container_name: zap
     ports:
-      - "2582:8080"  # Adjust ports as needed
+      - "2582:8080"
     networks:
       - hackinglab
     depends_on:
@@ -103,6 +103,122 @@ services:
     depends_on:
       - kali
 
+  juice-shop:
+    image: bkimminich/juice-shop:latest
+    container_name: juice-shop
+    ports:
+      - "3000:3000"
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  mutillidae:
+    image: citizenstig/nowasp:latest
+    container_name: mutillidae
+    ports:
+      - "2584:80"
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  securityshepherd:
+    image: ismisepaul/securityshepherd
+    container_name: securityshepherd
+    ports:
+      - "2585:80"
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  dvna:
+    image: appsecco/dvna
+    container_name: dvna
+    ports:
+      - "2586:9090"
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  wordpress:
+    image: wordpress:4.9.8
+    container_name: wordpress
+    ports:
+      - "2587:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - hackinglab
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    container_name: wordpressdb
+    platform: linux/amd64
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - hackinglab
+
+  openvas:
+    image: grafana/openvas
+    container_name: openvas
+    ports:
+      - "9392:9392"
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  burpsuite:
+    image: retenet/burpsuite
+    container_name: burpsuite
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  nodegoat:
+    image: contrastsecuritydemo/nodegoat:1.3.0
+    container_name: nodegoat
+    ports:
+      - "4000:4000"
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
+  vampi:
+    image: erev0s/vampi:latest
+    container_name: vampi
+    ports:
+      - "6000:5000"
+    networks:
+      - hackinglab
+    depends_on:
+      - kali
+
 networks:
   hackinglab:
     driver: bridge
+
+volumes:
+  db_data:
