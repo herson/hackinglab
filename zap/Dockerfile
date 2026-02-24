@@ -6,7 +6,7 @@ FROM alpine:latest
 USER root
 
 # Define build argument for ZAP_VERSION
-ARG ZAP_VERSION=2.15.0
+ARG ZAP_VERSION=2.17.0
 
 # Install necessary packages
 RUN apk update && apk add --no-cache wget tar
