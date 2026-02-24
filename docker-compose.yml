@@ -1,4 +1,23 @@
 services:
+
+  # ============================================================
+  # Landing Page — always starts, no profile required
+  # http://localhost:8080
+  # ============================================================
+  homer:
+    image: b4bz/homer:latest
+    container_name: homer
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./homer/assets:/www/assets
+    networks:
+      - hackinglab
+    restart: unless-stopped
+
+  # ============================================================
+  # Attacker Tools  —  docker compose --profile tools up -d
+  # ============================================================
   kali:
     build: ./kali
     container_name: kali
@@ -9,6 +28,7 @@ services:
     volumes:
       - ./kali:/root
     command: /bin/bash
+    profiles: ["tools", "full"]
 
   metasploit:
     build: ./metasploit
@@ -17,16 +37,14 @@ services:
       - ./metasploit:/home/msf/.msf4
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["tools", "full"]
 
   nmap:
     build: ./nmap
     container_name: nmap
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["tools", "full"]
 
   wireshark:
     build: ./wireshark
@@ -38,9 +56,22 @@ services:
       - ./wireshark:/root
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["tools", "full"]
 
+  burpsuite:
+    image: retenet/burpsuite
+    container_name: burpsuite
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    networks:
+      - hackinglab
+    profiles: ["tools", "full"]
+
+  # ============================================================
+  # Security Scanners  —  docker compose --profile scanners up -d
+  # ============================================================
   zap:
     build:
       context: ./zap
@@ -51,9 +82,20 @@ services:
       - "2582:8080"
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["scanners", "full"]
 
+  openvas:
+    image: grafana/openvas
+    container_name: openvas
+    ports:
+      - "9392:9392"
+    networks:
+      - hackinglab
+    profiles: ["scanners", "full"]
+
+  # ============================================================
+  # Vulnerable Web Applications  —  docker compose --profile web-apps up -d
+  # ============================================================
   dvwa:
     build: ./dvwa
     container_name: dvwa
@@ -63,8 +105,7 @@ services:
       - ./dvwa:/var/www/html
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["web-apps", "full"]
 
   webgoat:
     build: ./webgoat
@@ -73,8 +114,7 @@ services:
       - "2581:8080"
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["web-apps", "full"]
 
   bwapp:
     image: raesene/bwapp:latest
@@ -90,18 +130,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     networks:
       - hackinglab
-    depends_on:
-      - kali
-
-  vulnerable_api:
-    build: ./vulnerable_api
-    container_name: vulnerable_api
-    ports:
-      - "2500:5000"
-    networks:
-      - hackinglab
-    depends_on:
-      - kali
+    profiles: ["web-apps", "full"]
 
   juice-shop:
     image: bkimminich/juice-shop:latest
@@ -110,8 +139,7 @@ services:
       - "3000:3000"
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["web-apps", "full"]
 
   mutillidae:
     image: citizenstig/nowasp:latest
@@ -120,18 +148,20 @@ services:
       - "2584:80"
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["web-apps", "full"]
 
-  securityshepherd:
-    image: ismisepaul/securityshepherd
-    container_name: securityshepherd
+  # Replaces Security Shepherd (abandoned). Covers secrets mismanagement across
+  # env vars, config files, cloud metadata, and more.
+  wrongsecrets:
+    image: jeroenwillemsen/wrongsecrets:latest
+    container_name: wrongsecrets
     ports:
-      - "2585:80"
+      - "2585:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=without-docker
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["web-apps", "full"]
 
   dvna:
     image: appsecco/dvna
@@ -140,11 +170,10 @@ services:
       - "2586:9090"
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["web-apps", "full"]
 
   wordpress:
-    image: wordpress:4.9.8
+    image: wordpress:6.0
     container_name: wordpress
     ports:
       - "2587:80"
@@ -154,16 +183,16 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
     volumes:
-      - ./wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     networks:
       - hackinglab
     depends_on:
       - db
+    profiles: ["web-apps", "full"]
 
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: wordpressdb
-    platform: linux/amd64
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
@@ -173,28 +202,7 @@ services:
       - db_data:/var/lib/mysql
     networks:
       - hackinglab
-
-  openvas:
-    image: grafana/openvas
-    container_name: openvas
-    ports:
-      - "9392:9392"
-    networks:
-      - hackinglab
-    depends_on:
-      - kali
-
-  burpsuite:
-    image: retenet/burpsuite
-    container_name: burpsuite
-    environment:
-      - DISPLAY=${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-    networks:
-      - hackinglab
-    depends_on:
-      - kali
+    profiles: ["web-apps", "full"]
 
   nodegoat:
     image: contrastsecuritydemo/nodegoat:1.3.0
@@ -203,8 +211,19 @@ services:
       - "4000:4000"
     networks:
       - hackinglab
-    depends_on:
-      - kali
+    profiles: ["web-apps", "full"]
+
+  # ============================================================
+  # Vulnerable APIs  —  docker compose --profile api up -d
+  # ============================================================
+  vulnerable_api:
+    build: ./vulnerable_api
+    container_name: vulnerable_api
+    ports:
+      - "2500:5000"
+    networks:
+      - hackinglab
+    profiles: ["api", "full"]
 
   vampi:
     image: erev0s/vampi:latest
@@ -213,8 +232,112 @@ services:
       - "6000:5000"
     networks:
       - hackinglab
+    profiles: ["api", "full"]
+
+  # crAPI — OWASP Completely Ridiculous API. Covers OWASP API Security Top 10.
+  # Docs: https://github.com/OWASP/crAPI
+  # User-facing app: http://localhost:2590
+  # Email (registration/reset): http://localhost:2592
+  crapi-web:
+    image: crapi/crapi-web:latest
+    container_name: crapi-web
+    ports:
+      - "2590:80"
     depends_on:
-      - kali
+      - crapi-identity
+      - crapi-community
+      - crapi-workshop
+    networks:
+      - hackinglab
+    profiles: ["api", "full"]
+
+  crapi-identity:
+    image: crapi/crapi-identity:latest
+    container_name: crapi-identity
+    environment:
+      DB_NAME: crapi
+      DB_USERNAME: admin
+      DB_PASSWORD: crapipassword
+      DB_HOST: crapidb
+      DB_PORT: 5432
+      MAILHOG_HOST: mailhog
+      MAILHOG_PORT: 1025
+      SERVER_PORT: 8080
+      JWT_SECRET: crapi-lab-secret
+    depends_on:
+      - crapidb
+      - mailhog
+    networks:
+      - hackinglab
+    profiles: ["api", "full"]
+
+  crapi-community:
+    image: crapi/crapi-community:latest
+    container_name: crapi-community
+    environment:
+      MONGO_DB_HOST: crapi-mongodb
+      MONGO_DB_PORT: 27017
+      MONGO_DB_NAME: crapi
+      SERVER_PORT: 8087
+      IDENTITY_SERVICE: http://crapi-identity:8080
+    depends_on:
+      - crapi-mongodb
+      - crapi-identity
+    networks:
+      - hackinglab
+    profiles: ["api", "full"]
+
+  crapi-workshop:
+    image: crapi/crapi-workshop:latest
+    container_name: crapi-workshop
+    environment:
+      DB_NAME: crapi_workshop
+      DB_USER: admin
+      DB_PASSWORD: crapipassword
+      DB_HOST: crapidb
+      DB_PORT: 5432
+      MAILHOG_HOST: mailhog
+      MAILHOG_PORT: 1025
+      SERVER_PORT: 8000
+      IDENTITY_SERVICE: http://crapi-identity:8080
+    depends_on:
+      - crapidb
+      - mailhog
+      - crapi-identity
+    networks:
+      - hackinglab
+    profiles: ["api", "full"]
+
+  crapidb:
+    image: postgres:14
+    container_name: crapidb
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: crapipassword
+      POSTGRES_DB: crapi
+    volumes:
+      - crapi_db_data:/var/lib/postgresql/data
+    networks:
+      - hackinglab
+    profiles: ["api", "full"]
+
+  crapi-mongodb:
+    image: mongo:4.4
+    container_name: crapi-mongodb
+    volumes:
+      - crapi_mongo_data:/data/db
+    networks:
+      - hackinglab
+    profiles: ["api", "full"]
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - "2592:8025"
+    networks:
+      - hackinglab
+    profiles: ["api", "full"]
 
 networks:
   hackinglab:
@@ -222,3 +345,6 @@ networks:
 
 volumes:
   db_data:
+  wordpress_data:
+  crapi_db_data:
+  crapi_mongo_data:

@@ -1,424 +1,185 @@
-# 🛡️ Docker-Based Hacking Lab 🛡️
+# 🛡️ Docker-Based Hacking Lab
 
 ![Docker](https://img.shields.io/badge/Docker-🐳-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![GitHub stars](https://img.shields.io/github/stars/herson/hackinglab?style=social)
+![Docker Pulls](https://img.shields.io/docker/pulls/hersoncruz/hackinglab-kali?label=kali%20pulls)
+![Docker Pulls](https://img.shields.io/docker/pulls/hersoncruz/hackinglab-dvwa?label=dvwa%20pulls)
+![Maintained](https://img.shields.io/badge/maintained-yes-brightgreen)
 
-Welcome to the **Docker-Based Hacking Lab**! This repository offers a comprehensive, containerized environment tailored for penetration testing, vulnerability assessment, and security research. Utilizing Docker Compose, this lab integrates a suite of essential security tools and vulnerable applications, ensuring an isolated and reproducible setup suitable for both beginners and seasoned professionals.
+A containerised security training environment for penetration testing, vulnerability research, and CTF practice. One `docker compose` command spins up 20+ tools and deliberately vulnerable applications in an isolated network — no host pollution, fully reproducible across machines.
 
----
-
-## 📜 Table of Contents
-
-- [🛡️ Docker-Based Hacking Lab 🛡️](#-docker-based-hacking-lab-)
-  - [📜 Table of Contents](#-table-of-contents)
-  - [🔍 Overview](#-overview)
-  - [🚀 Features](#-features)
-  - [🛠️ Prerequisites](#️-prerequisites)
-  - [⚙️ Installation](#️-installation)
-  - [📦 Services Included](#-services-included)
-    - [🖥️ Kali Linux](#️-kali-linux)
-    - [🔴 Metasploit](#-metasploit)
-    - [🕵️‍♂️ Nmap](#️-nmap)
-    - [📡 Wireshark](#-wireshark)
-    - [🕷️ OWASP ZAP](#️-owasp-zap)
-    - [💀 DVWA (Damn Vulnerable Web Application)](#-dvwa-damn-vulnerable-web-application)
-    - [🔰 WebGoat](#️-webgoat)
-    - [🦠 bWAPP](#-bwapp)
-    - [🛡️ Vulnerable API](#️-vulnerable-api)
-    - [🍹 OWASP Juice Shop](#-owasp-juice-shop)
-    - [🧪 Mutillidae II](#-mutillidae-ii)
-    - [🔐 Security Shepherd](#-security-shepherd)
-    - [🐙 DVNA (Damn Vulnerable Node Application)](#-dvna-damn-vulnerable-node-application)
-    - [📝 Vulnerable WordPress](#-vulnerable-wordpress)
-    - [🔎 OpenVAS](#-openvas)
-    - [🛠️ Burp Suite](#️-burp-suite)
-    - [🐐 NodeGoat](#-nodegoat)
-    - [🧛 VAmPI](#-vampi)
-  - [📈 Usage](#️-usage)
-  - [🌐 Accessing the Services](#-accessing-the-services)
-  - [🤝 Contributing](#-contributing)
-  - [📄 License](#-license)
-  - [📫 Contact](#-contact)
-  - [🔗 Useful Links](#-useful-links)
-  - [💡 Tips & Tricks](#-tips--tricks)
+**Landing page at `http://localhost:8080` lists every service with live status indicators.**
 
 ---
 
-## 🔍 Overview
+## Table of Contents
 
-The **Docker-Based Hacking Lab** is engineered to provide a versatile and secure environment for security enthusiasts to practice and enhance their skills. By containerizing each tool and vulnerable application, the lab ensures that your host system remains unaffected, offering a safe playground for testing various security scenarios.
-
----
-
-## 🚀 Features
-
-- **Isolated Environment:** Each tool operates in its own container, preventing conflicts and ensuring system integrity.
-- **Scalable Setup:** Easily add or remove services as your needs evolve.
-- **Reproducible Builds:** Docker Compose guarantees consistent environments across different machines.
-- **Comprehensive Toolset:** Integrates industry-standard tools and vulnerable applications for a holistic security assessment experience.
-- **Cross-Platform Compatibility:** Supports both `linux/amd64` and `linux/arm64/v8` architectures with platform specifications.
+- [Quick Start](#quick-start)
+- [Profiles](#profiles)
+- [Services](#services)
+- [Labs](#labs)
+- [Contributing](#contributing)
+- [Sponsoring](#sponsoring)
+- [License](#license)
 
 ---
 
-## 🛠️ Prerequisites
+## Quick Start
 
-Before setting up the hacking lab, ensure you have the following installed on your system:
+**Prerequisites:** [Docker Desktop](https://docs.docker.com/get-docker/) (or Docker Engine + Compose plugin), Git.
 
-- **Docker:** [Install Docker](https://docs.docker.com/get-docker/)
-- **Docker Compose:** [Install Docker Compose](https://docs.docker.com/compose/install/)
-- **Git:** [Install Git](https://git-scm.com/downloads)
+```bash
+git clone https://github.com/herson/hackinglab.git
+cd hackinglab
+cp .env.example .env
 
-*Ensure Docker is running and you have the necessary permissions to execute Docker commands.*
+# Start everything
+docker compose --profile full up -d
 
----
-
-## ⚙️ Installation
-
-1. **Clone the Repository:**
-
-   ```bash
-   git clone https://github.com/herson/hackinglab.git
-   cd hackinglab
-   ```
-
-2. **Configure Environment Variables:**
-
-   Create a `.env` file in the project root to define any necessary environment variables.
-
-   ```bash
-   cp .env.example .env
-   nano .env
-   ```
-
-   *Adjust the variables as needed.*
-
-3. **Build and Deploy the Containers:**
-
-   ```bash
-   docker compose up --build -d
-   ```
-
-   *This command builds the Docker images and starts the containers in detached mode.*
+# Open the dashboard
+open http://localhost:8080
+```
 
 ---
 
-## 📦 Services Included
-
-### 🖥️ Kali Linux
-
-**Description:** A Debian-based Linux distribution crafted for digital forensics and penetration testing.
-
-**Features:**
-
-- Comprehensive suite of security tools
-- Customizable environment for various testing scenarios
-
-### 🔴 Metasploit
-
-**Description:** An advanced open-source platform for developing, testing, and executing exploit code against remote targets.
-
-**Features:**
-
-- Extensive exploit database
-- Supports a wide range of payloads
-- Integration with other security tools
-
-### 🕵️‍♂️ Nmap
-
-**Description:** A network scanning tool used to discover hosts and services on a computer network.
-
-**Features:**
-
-- Host discovery
-- Port scanning
-- OS detection
-- Scripting engine for automation
-
-### 📡 Wireshark
-
-**Description:** A network protocol analyzer that lets you capture and interactively browse the traffic running on a computer network.
-
-**Features:**
-
-- Deep inspection of hundreds of protocols
-- Live capture and offline analysis
-- Rich display filters
-
-### 🕷️ OWASP ZAP
-
-**Description:** An open-source web application security scanner, ideal for finding vulnerabilities in web applications.
-
-**Features:**
-
-- Automated scanners
-- Passive and active scanning
-- Integration with CI/CD pipelines
-
-### 💀 DVWA (Damn Vulnerable Web Application)
-
-**Description:** A PHP/MySQL web application that is damn vulnerable, designed for security training.
-
-**Features:**
-
-- Multiple vulnerability levels
-- Simulates real-world attack scenarios
-- Educational purpose for learning web vulnerabilities
-
-### 🔰 WebGoat
-
-**Description:** A deliberately insecure application maintained by OWASP designed to teach web application security lessons.
-
-**Features:**
-
-- Interactive lessons on various vulnerabilities
-- Supports multiple attack vectors
-- Community-driven content
-
-### 🦠 bWAPP
-
-**Description:** A free and open-source deliberately insecure web application for security training.
-
-**Features:**
-
-- Over 100 web vulnerabilities
-- Compatible with multiple platforms
-- Regular updates with new vulnerabilities
-
-### 🛡️ Vulnerable API
-
-**Description:** A sample API designed with intentional vulnerabilities for practicing API security testing.
-
-**Features:**
-
-- Common API vulnerabilities like SQL Injection, XSS, etc.
-- RESTful endpoints for testing
-- Educational purpose for API security
-
-### 🍹 OWASP Juice Shop
-
-**Description:** An intentionally insecure web application written entirely in JavaScript, offering a platform to learn about web vulnerabilities.
-
-**Features:**
-
-- Covers OWASP Top Ten vulnerabilities
-- Gamified challenge system
-- Detailed tutorials and hints
-
-### 🧪 Mutillidae II
-
-**Description:** A free, open-source, deliberately vulnerable web application providing a target for web security enthusiasts.
-
-**Features:**
-
-- Multiple security challenge levels
-- Demonstrates common web vulnerabilities
-- Educational tool for penetration testing
-
-### 🔐 Security Shepherd
-
-**Description:** An OWASP project designed to foster and improve security testing skills through a practical, interactive environment.
-
-**Features:**
-
-- Variety of challenges across different difficulty levels
-- Covers web and mobile security topics
-- Leaderboards to track progress
-
-### 🐙 DVNA (Damn Vulnerable Node Application)
-
-**Description:** A Node.js web application with known vulnerabilities, designed to teach security concepts in Node.js environments.
-
-**Features:**
-
-- Demonstrates common Node.js vulnerabilities
-- RESTful API endpoints
-- Educational resource for Node.js security
-
-### 📝 Vulnerable WordPress
-
-**Description:** A WordPress installation with intentionally vulnerable plugins and themes for security testing.
-
-**Features:**
-
-- Exploitable plugins and themes
-- Common WordPress vulnerabilities
-- Platform for practicing WordPress security assessments
-
-### 🔎 OpenVAS
-
-**Description:** An open-source vulnerability scanner and manager for discovering security issues in systems and applications.
-
-**Features:**
-
-- Comprehensive vulnerability scanning
-- Regular updates with latest vulnerability tests
-- Detailed reporting and remediation guidance
-
-### 🛠️ Burp Suite
-
-**Description:** An integrated platform for performing security testing of web applications.
-
-**Features:**
-
-- Intercepting proxy
-- Scanner for automated vulnerability detection
-- Extensibility through plugins
-
-### 🐐 NodeGoat
-
-**Description:** An OWASP project aimed at teaching developers how to write secure Node.js code through a vulnerable application.
-
-**Features:**
-
-- Interactive security lessons
-- Demonstrates vulnerabilities in a Node.js environment
-- Hands-on approach to learning
-
-### 🧛 VAmPI
-
-**Description:** A vulnerable REST API application designed to facilitate learning about API security issues.
-
-**Features:**
-
-- Common API vulnerabilities
-- Practice API penetration testing
-- Educational resource for API security concepts
+## Profiles
+
+Use profiles to start only the subset you need — helpful on machines with limited RAM.
+
+| Profile | What starts | RAM (approx) |
+|---|---|---|
+| *(none)* | Landing page only | < 100 MB |
+| `web-apps` | All vulnerable web applications | ~3 GB |
+| `api` | All vulnerable APIs + crAPI infrastructure | ~2 GB |
+| `scanners` | ZAP + OpenVAS | ~2 GB |
+| `tools` | Kali, Metasploit, Nmap, Wireshark, Burp Suite | ~4 GB |
+| `full` | Everything | ~8 GB |
+
+```bash
+# Web application targets only
+docker compose --profile web-apps up -d
+
+# API security targets only
+docker compose --profile api up -d
+
+# Mix profiles freely
+docker compose --profile web-apps --profile api up -d
+
+# Stop everything
+docker compose --profile full down
+```
 
 ---
 
-## 📈 Usage
+## Services
 
-1. **Start All Services:**
+### Landing Page
 
-   ```bash
-   docker compose up -d
-   ```
+| Service | Port | URL |
+|---|---|---|
+| Homer Dashboard | 8080 | `http://localhost:8080` |
 
-2. **Stop All Services:**
+### Vulnerable Web Applications (`--profile web-apps`)
 
-   ```bash
-   docker compose down
-   ```
+| Service | Port | URL | Covers |
+|---|---|---|---|
+| DVWA | 2580 | `http://localhost:2580` | SQLi, XSS, CSRF, File Upload, Command Injection |
+| WebGoat | 2581 | `http://localhost:2581/WebGoat` | OWASP Top 10 interactive lessons |
+| bWAPP | 2583 | `http://localhost:2583` | 100+ vulnerability categories |
+| OWASP Juice Shop | 3000 | `http://localhost:3000` | OWASP Top 10, gamified challenges |
+| Mutillidae II | 2584 | `http://localhost:2584` | Adjustable security levels |
+| OWASP WrongSecrets | 2585 | `http://localhost:2585` | Secrets mismanagement |
+| DVNA | 2586 | `http://localhost:2586` | Node.js-specific vulnerabilities |
+| Vulnerable WordPress | 2587 | `http://localhost:2587` | CMS plugin/theme exploits |
+| NodeGoat | 4000 | `http://localhost:4000` | Secure Node.js coding lessons |
 
-3. **View Logs:**
+### Vulnerable APIs (`--profile api`)
 
-   ```bash
-   docker compose logs -f
-   ```
+| Service | Port | URL | Covers |
+|---|---|---|---|
+| crAPI | 2590 | `http://localhost:2590` | OWASP API Security Top 10 |
+| crAPI Mailbox | 2592 | `http://localhost:2592` | Email flows for crAPI |
+| VAmPI | 6000 | `http://localhost:6000` | OWASP API Security Top 10 |
+| Vulnerable API | 2500 | `http://localhost:2500` | Injection, auth bypass |
 
-4. **Access a Specific Service:**
+### Security Scanners (`--profile scanners`)
 
-   ```bash
-   docker compose exec <service_name> /bin/bash
-   ```
+| Service | Port | URL |
+|---|---|---|
+| OWASP ZAP | 2582 | `http://localhost:2582` |
+| OpenVAS | 9392 | `https://localhost:9392` |
 
-   *Replace `<service_name>` with the name of the service (e.g., `kali`, `metasploit`).*
+### CLI / GUI Tools (`--profile tools`)
 
----
-
-## 🌐 Accessing the Services
-
-| **Service**           | **Port Mapping** | **URL**                        |
-|-----------------------|------------------|--------------------------------|
-| **Kali Linux**        | N/A              | Access via Docker CLI or SSH   |
-| **Metasploit**        | N/A              | Use CLI tools within container |
-| **Nmap**              | N/A              | Use CLI tools within container |
-| **Wireshark**         | N/A              | Access via GUI (X11 Forwarding)|
-| **OWASP ZAP**         | 2582:8080        | `http://localhost:2582`        |
-| **DVWA**              | 2580:80          | `http://localhost:2580`        |
-| **WebGoat**           | 2581:8080        | `http://localhost:2581/WebGoat`|
-| **bWAPP**             | 2583:80          | `http://localhost:2583`        |
-| **Vulnerable API**    | 2500:5000        | `http://localhost:2500`        |
-| **OWASP Juice Shop**  | 3000:3000        | `http://localhost:3000`        |
-| **Mutillidae II**     | 2584:80          | `http://localhost:2584`        |
-| **Security Shepherd** | 2585:80          | `http://localhost:2585`        |
-| **DVNA**              | 2586:9090        | `http://localhost:2586`        |
-| **Vulnerable WordPress** | 2587:80      | `http://localhost:2587`        |
-| **OpenVAS**           | 9392:9392        | `https://localhost:9392`       |
-| **Burp Suite**        | N/A              | Access via GUI (X11 Forwarding)|
-| **NodeGoat**          | 4000:4000        | `http://localhost:4000`        |
-| **VAmPI**             | 6000:5000        | `http://localhost:6000`        |
-
-*Ensure that the ports are not being used by other services on your host machine.*
+| Service | Access |
+|---|---|
+| Kali Linux | `docker compose --profile tools exec kali /bin/bash` |
+| Metasploit | `docker compose --profile tools exec metasploit msfconsole` |
+| Nmap | `docker compose --profile tools exec nmap nmap <target>` |
+| Wireshark | X11 forwarding — `docker compose --profile tools exec wireshark wireshark` |
+| Burp Suite | X11 forwarding — `docker compose --profile tools exec burpsuite burpsuite` |
 
 ---
 
-## 🤝 Contributing
+## Labs
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Step-by-step guided scenarios in the [`labs/`](./labs/) directory:
 
-1. **Fork the Project**
-2. **Create Your Feature Branch**
-
-   ```bash
-   git checkout -b feature/AmazingFeature
-   ```
-
-3. **Commit Your Changes**
-
-   ```bash
-   git commit -m 'Add some AmazingFeature'
-   ```
-
-4. **Push to the Branch**
-
-   ```bash
-   git push origin feature/AmazingFeature
-   ```
-
-5. **Open a Pull Request**
+| Lab | Target | Topics |
+|---|---|---|
+| [01 — SQL Injection Fundamentals](./labs/01-sqli-dvwa.md) | DVWA | Union-based, blind, sqlmap, defence |
+| [02 — API Security: OWASP API Top 10](./labs/02-api-owasp-top10-vampi.md) | VAmPI | BOLA, broken auth, mass assignment, function-level auth |
+| [03 — Cross-Site Scripting](./labs/03-xss-juice-shop.md) | Juice Shop | DOM, reflected, stored XSS, filter bypass |
 
 ---
 
-## 📄 License
+## Common Commands
 
-Distributed under the MIT License. See `LICENSE` for more information.
+```bash
+# View logs for a specific service
+docker compose logs -f dvwa
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+# Shell into a running container
+docker compose --profile web-apps exec dvwa /bin/bash
 
----
+# Rebuild a custom image after Dockerfile changes
+docker compose --profile web-apps build dvwa
+docker compose --profile web-apps up -d dvwa
 
-## 📫 Contact
-
-**Herson Cruz** – [@hersoncruz](https://twitter.com/hersoncruz)
-
-Project Link: [https://github.com/herson/hackinglab](https://github.com/herson/hackinglab)
-
----
-
-## 🔗 Useful Links
-
-- **Docker Documentation:** [https://docs.docker.com/](https://docs.docker.com/)
-- **Docker Compose Documentation:** [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
-- **Kali Linux:** [https://www.kali.org/](https://www.kali.org/)
-- **Metasploit Framework:** [https://metasploit.help.rapid7.com/](https://metasploit.help.rapid7.com/)
-- **Nmap:** [https://nmap.org/](https://nmap.org/)
-- **Wireshark:** [https://www.wireshark.org/](https://www.wireshark.org/)
-- **OWASP ZAP:** [https://www.zaproxy.org/](https://www.zaproxy.org/)
-- **DVWA:** [http://www.dvwa.co.uk/](http://www.dvwa.co.uk/)
-- **WebGoat:** [https://owasp.org/www-project-webgoat/](https://owasp.org/www-project-webgoat/)
-- **bWAPP:** [http://www.itsecgames.com/](http://www.itsecgames.com/)
-- **OWASP Juice Shop:** [https://owasp.org/www-project-juice-shop/](https://owasp.org/www-project-juice-shop/)
-- **Mutillidae II:** [https://github.com/webpwnized/mutillidae](https://github.com/webpwnized/mutillidae)
-- **Security Shepherd:** [https://owasp.org/www-project-security-shepherd/](https://owasp.org/www-project-security-shepherd/)
-- **DVNA:** [https://github.com/appsecco/dvna](https://github.com/appsecco/dvna)
-- **WordPress:** [https://wordpress.org/](https://wordpress.org/)
-- **OpenVAS:** [https://www.openvas.org/](https://www.openvas.org/)
-- **Burp Suite:** [https://portswigger.net/burp](https://portswigger.net/burp)
-- **NodeGoat:** [https://owasp.org/www-project-nodegoat/](https://owasp.org/www-project-nodegoat/)
-- **VAmPI:** [https://github.com/erev0s/VAmPI](https://github.com/erev0s/VAmPI)
+# Stop and remove containers + volumes (full reset)
+docker compose --profile full down -v
+```
 
 ---
 
-## 💡 Tips & Tricks
+## Contributing
 
-- **Persisting Data:** Ensure that important data is persisted using Docker volumes to prevent data loss upon container restarts.
-- **Security Best Practices:** Regularly update your Docker images to incorporate the latest security patches.
-- **Resource Management:** Monitor container resource usage to ensure optimal performance of your host machine.
-- **Networking:** Leverage Docker networks to simulate complex network topologies for advanced testing scenarios.
-- **Accessing GUI Applications:** For applications like Wireshark and Burp Suite, ensure you have X11 forwarding set up to access the GUI.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to add a new service, write a lab scenario, or fix a bug.
+
+Bug reports and feature requests: use the [issue templates](.github/ISSUE_TEMPLATE/).
 
 ---
 
-> **Disclaimer:** This hacking lab is intended for educational purposes only. Ensure you have proper authorization before conducting any security assessments or penetration testing on systems you do not own.
+## Sponsoring
+
+If this lab saves you time or helps your learning, consider sponsoring:
+
+- **GitHub Sponsors** — [github.com/sponsors/herson](https://github.com/sponsors/herson)
+- **Ko-fi** — [ko-fi.com/herson](https://ko-fi.com/herson)
+- **Buy Me a Coffee** — [buymeacoffee.com/herson](https://buymeacoffee.com/herson)
+- **Crypto (OpenNode)** — [checkout.opennode.com/p/0871796a-f309-4e95-82c7-ec8e606e4c45](https://checkout.opennode.com/p/0871796a-f309-4e95-82c7-ec8e606e4c45)
+
+Sponsor funds go towards maintaining images, writing new lab content, and keeping the project up to date with emerging vulnerability classes.
+
+---
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
+
+**Disclaimer:** This lab is for educational purposes only. Always obtain proper written authorisation before testing any system you do not own.
+
+---
+
+**Herson Cruz** · [@hersoncruz](https://twitter.com/hersoncruz) · [github.com/herson/hackinglab](https://github.com/herson/hackinglab)

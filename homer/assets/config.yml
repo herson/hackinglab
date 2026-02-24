@@ -1,0 +1,169 @@
+---
+title: "Hacking Lab"
+subtitle: "Docker-Based Security Training Environment"
+documentTitle: "Hacking Lab"
+
+header: true
+footer: '<p>🛡️ For educational purposes only. Always obtain proper authorization before testing.</p>'
+
+connectivityCheck: true
+
+theme: default
+
+colors:
+  dark:
+    highlight-primary: "#e53e3e"
+    highlight-secondary: "#c53030"
+    highlight-hover: "#feb2b2"
+    background: "#1a1a2e"
+    card-background: "#16213e"
+    text: "#e2e8f0"
+    text-header: "#ffffff"
+    text-title: "#f7fafc"
+    text-subtitle: "#a0aec0"
+    card-shadow: rgba(0, 0, 0, 0.5)
+    link: "#fc8181"
+    link-hover: "#feb2b2"
+    background-image: ""
+  light:
+    highlight-primary: "#e53e3e"
+    highlight-secondary: "#c53030"
+    highlight-hover: "#feb2b2"
+    background: "#f7fafc"
+    card-background: "#ffffff"
+    text: "#2d3748"
+    text-header: "#1a202c"
+    text-title: "#2d3748"
+    text-subtitle: "#718096"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#e53e3e"
+    link-hover: "#c53030"
+    background-image: ""
+
+services:
+  - name: "Vulnerable Web Applications"
+    icon: "fas fa-globe"
+    items:
+      - name: "DVWA"
+        subtitle: "Damn Vulnerable Web Application — SQLi, XSS, CSRF, File Upload, and more"
+        tag: "php"
+        url: "http://localhost:2580"
+        target: "_blank"
+
+      - name: "WebGoat"
+        subtitle: "OWASP interactive lessons for developers across OWASP Top 10 categories"
+        tag: "java"
+        url: "http://localhost:2581/WebGoat"
+        target: "_blank"
+
+      - name: "bWAPP"
+        subtitle: "Buggy Web Application — 100+ web vulnerabilities across multiple categories"
+        tag: "php"
+        url: "http://localhost:2583"
+        target: "_blank"
+
+      - name: "OWASP Juice Shop"
+        subtitle: "Modern gamified vulnerable app — challenges cover the full OWASP Top 10"
+        tag: "node"
+        url: "http://localhost:3000"
+        target: "_blank"
+
+      - name: "Mutillidae II"
+        subtitle: "OWASP Mutillidae II — adjustable security levels and dozens of challenge types"
+        tag: "php"
+        url: "http://localhost:2584"
+        target: "_blank"
+
+      - name: "OWASP WrongSecrets"
+        subtitle: "Secrets mismanagement challenges — env vars, config files, cloud metadata, and more"
+        tag: "java"
+        url: "http://localhost:2585"
+        target: "_blank"
+
+      - name: "DVNA"
+        subtitle: "Damn Vulnerable Node Application — Node.js-specific vulnerabilities via RESTful API"
+        tag: "node"
+        url: "http://localhost:2586"
+        target: "_blank"
+
+      - name: "Vulnerable WordPress"
+        subtitle: "WordPress 6.0 with exploitable plugins and themes for CMS security practice"
+        tag: "php"
+        url: "http://localhost:2587"
+        target: "_blank"
+
+      - name: "NodeGoat"
+        subtitle: "OWASP NodeGoat — hands-on secure coding lessons for Node.js developers"
+        tag: "node"
+        url: "http://localhost:4000"
+        target: "_blank"
+
+  - name: "Vulnerable APIs"
+    icon: "fas fa-plug"
+    items:
+      - name: "crAPI"
+        subtitle: "OWASP Completely Ridiculous API — full OWASP API Security Top 10 coverage"
+        tag: "api"
+        url: "http://localhost:2590"
+        target: "_blank"
+
+      - name: "crAPI Mailbox"
+        subtitle: "MailHog inbox for crAPI email verification and password reset flows"
+        tag: "mail"
+        url: "http://localhost:2592"
+        target: "_blank"
+
+      - name: "VAmPI"
+        subtitle: "Vulnerable REST API — covers OWASP API Security Top 10 attack scenarios"
+        tag: "api"
+        url: "http://localhost:6000"
+        target: "_blank"
+
+      - name: "Vulnerable API"
+        subtitle: "Custom Flask API with intentional injection and authentication vulnerabilities"
+        tag: "python"
+        url: "http://localhost:2500"
+        target: "_blank"
+
+  - name: "Security Scanners"
+    icon: "fas fa-search"
+    items:
+      - name: "OWASP ZAP"
+        subtitle: "Open-source web app security scanner — active/passive scanning and CI/CD integration"
+        tag: "scanner"
+        url: "http://localhost:2582"
+        target: "_blank"
+
+      - name: "OpenVAS"
+        subtitle: "Comprehensive network vulnerability scanner — connect via HTTPS"
+        tag: "scanner"
+        url: "https://localhost:9392"
+        target: "_blank"
+
+  - name: "CLI / GUI Tools"
+    icon: "fas fa-terminal"
+    items:
+      - name: "Kali Linux"
+        subtitle: "docker compose --profile tools exec kali /bin/bash"
+        tag: "cli"
+        url: "#"
+
+      - name: "Metasploit"
+        subtitle: "docker compose --profile tools exec metasploit msfconsole"
+        tag: "cli"
+        url: "#"
+
+      - name: "Nmap"
+        subtitle: "docker compose --profile tools exec nmap nmap &lt;target&gt;"
+        tag: "cli"
+        url: "#"
+
+      - name: "Wireshark"
+        subtitle: "Requires X11 forwarding — docker compose --profile tools exec wireshark wireshark"
+        tag: "gui"
+        url: "#"
+
+      - name: "Burp Suite"
+        subtitle: "Requires X11 forwarding — docker compose --profile tools exec burpsuite burpsuite"
+        tag: "gui"
+        url: "#"

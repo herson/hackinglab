@@ -1,0 +1,83 @@
+name: Bug Report
+description: A service fails to start, a port is wrong, or something documented doesn't work.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please fill in as much detail as possible.
+
+  - type: dropdown
+    id: service
+    attributes:
+      label: Affected service
+      description: Which service is broken?
+      options:
+        - homer (landing page)
+        - dvwa
+        - webgoat
+        - bwapp
+        - juice-shop
+        - mutillidae
+        - wrongsecrets
+        - dvna
+        - wordpress
+        - nodegoat
+        - vulnerable_api
+        - vampi
+        - crapi
+        - zap
+        - openvas
+        - kali
+        - metasploit
+        - nmap
+        - wireshark
+        - burpsuite
+        - Other / multiple services
+    validations:
+      required: true
+
+  - type: dropdown
+    id: profile
+    attributes:
+      label: Compose profile used
+      options:
+        - web-apps
+        - api
+        - tools
+        - scanners
+        - full
+        - No profile (homer only)
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the bug clearly. What did you do, what did you expect, what happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Paste the output of `docker compose logs <service-name>` here.
+      render: shell
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system and architecture
+      placeholder: "e.g. macOS 14 (Apple M3), Ubuntu 24.04 (x86_64)"
+    validations:
+      required: true
+
+  - type: input
+    id: docker-version
+    attributes:
+      label: Docker version
+      placeholder: "docker --version output"
+    validations:
+      required: true

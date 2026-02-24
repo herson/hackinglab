@@ -1,0 +1,43 @@
+name: Feature Request
+description: Suggest a new service, lab write-up, or improvement.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea to make the lab better? Fill in the details below.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type of contribution
+      options:
+        - New vulnerable application / service
+        - New security tool
+        - New lab write-up (labs/ scenario)
+        - Improvement to an existing service
+        - Documentation improvement
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the feature
+      description: What would you like added or changed, and why is it useful for security training?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Are there existing services in the lab that partially cover this? Why are they insufficient?
+
+  - type: input
+    id: upstream
+    attributes:
+      label: Upstream project link
+      description: If suggesting a new service, link to its GitHub repo or Docker Hub image.
+      placeholder: "https://github.com/..."
