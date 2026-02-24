@@ -6,7 +6,7 @@ FROM debian:bullseye
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages
-RUN apt-get update && apt-get install -y \
+RUN apt-get update -o Acquire::Retries=3 && apt-get install -y -o Acquire::Retries=3 \
     apache2 \
     mariadb-server \
     php \
